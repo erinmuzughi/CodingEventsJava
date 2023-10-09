@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
@@ -25,11 +23,24 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @NotBlank(message = "Event Location is required.")
+    @NotNull(message = "Enter a valid Event Location.")
+    private String location;
+
+//    @AssertTrue
+//    private boolean requireRegistration;
+
+    @Positive(message="Number of attendees must be one or more.")
+    private int numAttendees;
+
+    public Event(String name, String description, String contactEmail, String location, Integer numAttendees) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location = location;
+        this.numAttendees = numAttendees;
+//        this.requireRegistration = requireRegistration;
     }
 
     public Event() {
@@ -59,6 +70,31 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+//    public boolean isRequireRegistration() {
+//        return requireRegistration;
+//    }
+//
+//    public void setRequireRegistration(boolean requireRegistration) {
+//        this.requireRegistration = requireRegistration;
+//    }
+
+
+    public int getNumAttendees() {
+        return numAttendees;
+    }
+
+    public void setNumAttendees(int numAttendees) {
+        this.numAttendees = numAttendees;
     }
 
     public int getId() {
