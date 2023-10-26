@@ -9,11 +9,9 @@ import jakarta.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
-public class EventCategory {
+public class EventCategory extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int id;
+
     private String name;
 
     public EventCategory(String name) {
@@ -22,9 +20,7 @@ public class EventCategory {
 
     public EventCategory() {}
 
-    public int getId() {
-        return id;
-    }
+
     @NotBlank(message = "Category name is required")
     @Size(min = 5, max = 50, message = "Category Name must be between 5 and 50 characters")
     public String getName() {
@@ -39,17 +35,6 @@ public class EventCategory {
         return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventCategory that = (EventCategory) o;
-        return id == that.id;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
 
